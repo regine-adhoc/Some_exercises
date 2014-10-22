@@ -1,0 +1,133 @@
+173-228-90-253:count_ips marciafeitel$ perl count_valid_ips.pl `pwd`
+1_24_good 24
+24_good 24
+24_good 24
+9_copy 1
+A_24_good 24
+B_copy 1
+C_copy 1
+D_copy 1
+Z_copy 1
+a_copy 1
+one_ip_bad_file 1
+one_ip_mostly_bad 1
+
+173-228-90-253:count_ips marciafeitel$ find ip_search_tree -print
+ip_search_tree
+ip_search_tree/24_good
+ip_search_tree/child_1_1
+ip_search_tree/child_1_1/1_24_good
+ip_search_tree/child_1_1/C_copy
+ip_search_tree/child_1_1/empty.1
+ip_search_tree/child_1_2
+ip_search_tree/child_1_2/A_24_good
+ip_search_tree/child_1_2/child_2_1
+ip_search_tree/child_1_2/child_2_1/9_copy
+ip_search_tree/child_1_2/child_2_1/a_copy
+ip_search_tree/child_1_2/child_2_1/B_copy
+ip_search_tree/child_1_2/child_2_1/empty.2
+ip_search_tree/child_1_2/text.2
+ip_search_tree/child_1_2/Z_copy
+ip_search_tree/D_copy
+ip_search_tree/one_ip_mostly_bad
+ip_search_tree/text.1
+173-228-90-253:count_ips marciafeitel$ echo copy files are copies of files with bad ips and one good one
+copy files are copies of files with bad ips and one good one
+173-228-90-253:count_ips marciafeitel$ echo empty and text files have no ips
+empty and text files have no ips
+173-228-90-253:count_ips marciafeitel$ echo error cases
+error cases
+173-228-90-253:count_ips marciafeitel$ perl count_valid_ips.pl
+Use of uninitialized value $ARGV[0] in pattern match (m//) at count_valid_ips.pl line 45.
+must specify absolute path to at least one directory as argument
+173-228-90-253:count_ips marciafeitel$ perl count_valid_ips.pl count_valid_ips.pl
+must specify absolute path to at least one directory as argument
+173-228-90-253:count_ips marciafeitel$ perl count_valid_ips.pl `pwd`/ip_search_tree
+1_24_good 24
+24_good 24
+9_copy 1
+A_24_good 24
+B_copy 1
+C_copy 1
+D_copy 1
+Z_copy 1
+a_copy 1
+one_ip_mostly_bad 1
+
+173-228-90-253:count_ips marciafeitel$ perl count_valid_ips.pl /usr > usr.out
+Can't cd to (/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/) mysql: Permission denied
+ at count_valid_ips.pl line 46.
+Can't cd to (/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/) performance_schema: Permission denied
+ at count_valid_ips.pl line 46.
+Can't cd to (/usr/sbin/) authserver: Permission denied
+ at count_valid_ips.pl line 46.
+cannot open /usr/bin/ipcs for reading
+cannot open /usr/bin/sudo for reading
+cannot open /usr/libexec/security_authtrampoline for reading
+cannot open /usr/libexec/ssh-keysign for reading
+cannot open /usr/libexec/cups/backend/dnssd for reading
+cannot open /usr/libexec/cups/backend/fax for reading
+cannot open /usr/libexec/cups/backend/http for reading
+cannot open /usr/libexec/cups/backend/https for reading
+cannot open /usr/libexec/cups/backend/ipp for reading
+cannot open /usr/libexec/cups/backend/ipps for reading
+cannot open /usr/libexec/cups/backend/ippusb for reading
+cannot open /usr/libexec/cups/backend/lpd for reading
+cannot open /usr/libexec/cups/backend/mdns for reading
+cannot open /usr/libexec/cups/backend/smb for reading
+cannot open /usr/local/Library/ENV/pkgconfig/fuse/fuse.pc for reading
+cannot open /usr/local/Library/ENV/pkgconfig/fuse/osxfuse.pc for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/173-228-90-118.dsl.dynamic.sonic.net.err for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/auto.cnf for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/ib_logfile0 for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/ib_logfile1 for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/ibdata1 for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/ibtmp1 for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/Marcia-Feitels-MacBook-Pro.local.err for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/Marcia-Feitels-MacBook-Pro.local.pid for reading
+cannot open /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/mysqld_safe.pid for reading
+cannot open /usr/sbin/cupsd for reading
+cannot open /usr/sbin/visudo for reading
+cannot open /usr/sbin/weakpass_edit for reading
+
+173-228-90-253:count_ips marciafeitel$ echo note that files with the same name, not necessarily links, show up twice without disambiguation
+note that files with the same name, not necessarily links, show up twice without disambiguation
+173-228-90-253:count_ips marciafeitel$ echo repeated file names, not necessarily same file in two places
+repeated file names, not necessarily same file in two places
+173-228-90-253:count_ips marciafeitel$ awk '{print $1}' < usr.out | uniq -d | wc -l
+     145
+173-228-90-253:count_ips marciafeitel$ echo identical lines, difference corresponds to different files with same name
+identical lines, difference corresponds to different files with same name
+173-228-90-253:count_ips marciafeitel$ uniq -d < usr.out | wc -l
+     139
+173-228-90-253:count_ips marciafeitel$ echo for example, my.cnf shows up in many places, including a few times in the output
+for example, my.cnf shows up in many places, including a few times in the output
+173-228-90-253:count_ips marciafeitel$ grep my.cnf usr.out
+my.cnf 1
+my.cnf 1
+my.cnf 1
+my.cnf 1
+173-228-90-253:count_ips marciafeitel$ find /usr -name my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/federated/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/ndb/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/ndb_big/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/ndb_binlog/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/ndb_rpl/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/ndb_team/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/rpl/extension/bhs/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/rpl/my.cnf
+/usr/local/Cellar/mysql/5.6.20_1/mysql-test/suite/rpl_ndb/my.cnf
+find: /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/mysql: Permission denied
+find: /usr/local/mysql-5.7.4-m14-osx10.7-x86_64/data/performance_schema: Permission denied
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/federated/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb_big/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb_binlog/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb_memcache/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb_rpl/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/ndb_team/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/rpl/extension/bhs/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/rpl/my.cnf
+/usr/local/mysql-5.7.4-m14-osx10.7-x86_64/mysql-test/suite/rpl_ndb/my.cnf
+find: /usr/sbin/authserver: Permission denied

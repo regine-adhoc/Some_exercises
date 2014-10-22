@@ -1,0 +1,17 @@
+perl count_valid_ips.pl `pwd`
+find ip_search_tree -print
+echo copy files are copies of files with bad ips and one good one
+echo empty and text files have no ips
+echo error cases
+perl count_valid_ips.pl
+perl count_valid_ips.pl count_valid_ips.pl
+perl count_valid_ips.pl `pwd`/ip_search_tree
+perl count_valid_ips.pl /usr > usr.out
+echo note that files with the same name, not necessarily links, show up twice without disambiguation
+echo repeated file names, not necessarily same file in two places
+awk '{print $1}' < usr.out | uniq -d | wc -l
+echo identical lines, difference corresponds to different files with same name
+uniq -d < usr.out | wc -l
+echo for example, my.cnf shows up in many places, including a few times in the output
+grep my.cnf usr.out
+find /usr -name my.cnf
