@@ -1,0 +1,42 @@
+173-228-90-253:Some_exercises marciafeitel$ perl dependencies.pl
+Must supply a file of dependencies
+173-228-90-253:Some_exercises marciafeitel$ perl dependencies.pl dep2
+$VAR1 = {
+          'X2' => '',
+          'X3' => '',
+          'X4' => '',
+          'X1' => ''
+        };
+X1
+evaluating symbolX1
+expanding of X1
+expanding new symbol X1 at level 1
+1 -th level symbol is X2
+expanding new symbol X2 at level 2
+2 -th level symbol is X3
+expanding new symbol X3 at level 3
+3 -th level symbol is X4
+expanding new symbol X4 at level 4
+4 -th level symbol is X1
+expanding new symbol X1 at level 5
+5 -th level symbol is X2
+expanding new symbol X2 at level 6
+circular dependencies in this table:
+$VAR1 = {
+          'X2' => [
+                    'X3',
+                    '2'
+                  ],
+          'X3' => [
+                    'X4',
+                    '3'
+                  ],
+          'X4' => [
+                    'X1',
+                    '4'
+                  ],
+          'X1' => [
+                    'X2',
+                    '1'
+                  ]
+        };
